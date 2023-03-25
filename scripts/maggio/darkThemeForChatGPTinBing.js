@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Dark theme for ChatGPT in Bing
 // @namespace    https://github.com/Mathis-Gasparotto/tampermonkey-scripts/tree/master/scripts/maggio
-// @version      0.1.1
+// @version      0.1.2
 // @updateURL    https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/darkThemeForChatGPTinBing.js
 // @downloadURL  https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/darkThemeForChatGPTinBing.js
 // @description  try to take over the world!
@@ -9,6 +9,7 @@
 // @match        https://www.bing.com/search?q=*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=bing.com
 // @grant        GM_addStyle
+// @run-at       document-start
 // ==/UserScript==
 
 (function() {

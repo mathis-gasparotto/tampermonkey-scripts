@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         No badge bg YT
 // @namespace    https://github.com/Mathis-Gasparotto/tampermonkey-scripts/tree/master/scripts/maggio
-// @version      0.3.1
+// @version      0.3.2
 // @updateURL    https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/noBadgeBgYT.js
 // @downloadURL  https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/noBadgeBgYT.js
 // @description  disable badge background on Youtube
@@ -9,7 +9,7 @@
 // @match        https://www.youtube.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=youtube.com
 // @grant        GM_addStyle
-// @run-at       document-body
+// @run-at       document-start
 // ==/UserScript==
 
 (function() {
