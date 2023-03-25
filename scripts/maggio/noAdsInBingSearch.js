@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         No ad results on bing search
-// @namespace    http://tampermonkey.net/
-// @version      0.4
+// @namespace    https://github.com/Mathis-Gasparotto/tampermonkey-scripts/tree/master/scripts/maggio
+// @version      0.4.1
 // @updateURL    https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/noAdsInBingSearch.js
 // @downloadURL  https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/noAdsInBingSearch.js
 // @description  ui

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         No badge bg YT
-// @namespace    https://mathisgasparotto.fr/
-// @version      0.3
+// @namespace    https://github.com/Mathis-Gasparotto/tampermonkey-scripts/tree/master/scripts/maggio
+// @version      0.3.1
 // @updateURL    https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/noBadgeBgYT.js
 // @downloadURL  https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/noBadgeBgYT.js
 // @description  disable badge background on Youtube

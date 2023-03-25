@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Ad block for YT
-// @namespace    https://mathisgasparotto.fr/
-// @version      0.1
+// @namespace    https://github.com/Mathis-Gasparotto/tampermonkey-scripts/tree/master/scripts/maggio
+// @version      0.1.1
 // @updateURL    https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/addBlockForYT.js
 // @downloadURL  https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/addBlockForYT.js
 // @description  disable top ads on YT

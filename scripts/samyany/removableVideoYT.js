@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Removable video YT
-// @namespace    http://tampermonkey.net/
-// @version      2.0
+// @namespace    https://github.com/Mathis-Gasparotto/tampermonkey-scripts/tree/master/scripts/samyany
+// @version      2.0.1
 // @updateURL    https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/samyany/removableVideoYT.js
 // @downloadURL  https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/samyany/removableVideoYT.js
 // @description  Add the capacity to move the video on the page.
