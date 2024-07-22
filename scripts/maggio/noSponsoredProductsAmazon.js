@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         No sponsored products on Amazon (FR) search results
 // @namespace    https://github.com/Mathis-Gasparotto/tampermonkey-scripts/tree/master/scripts/maggio
-// @version      0.0.0
+// @version      0.1.0
 // @updateURL    https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/noSponsoredProductsAmazon.js
 // @downloadURL  https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/noSponsoredProductsAmazon.js
 // @description  NTM Amazon
