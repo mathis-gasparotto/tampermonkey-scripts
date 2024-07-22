@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Remove Shorts from Youtube
 // @namespace    https://github.com/Mathis-Gasparotto/tampermonkey-scripts/tree/master/scripts/maggio
-// @version      0.1.0
+// @version      0.2.0
 // @updateURL    https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/noYoutubeShort.js
 // @downloadURL  https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/noYoutubeShort.js
 // @description  Save your time
@@ -31,12 +31,12 @@
     }
   `)
   if (window.location.href.includes('youtube.com/shorts')) {
-    window.location.href = 'https://www.youtube.com/'
+    window.location.href = window.location.href.replace('youtube.com/shorts/', 'youtube.com/watch?v=')
   }
   if (window.onurlchange === null) {
     window.addEventListener('urlchange', () => {
       if (window.location.href.includes('youtube.com/shorts')) {
-        window.location.href = 'https://www.youtube.com/'
+        window.location.href = window.location.href.replace('youtube.com/shorts/', 'youtube.com/watch?v=')
       }
     })
   }
