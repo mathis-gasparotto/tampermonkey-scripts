@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Remove Shorts from Youtube
 // @namespace    https://github.com/Mathis-Gasparotto/tampermonkey-scripts/tree/master/scripts/maggio
-// @version      0.2.0
+// @version      0.2.1
 // @updateURL    https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/noYoutubeShort.js
 // @downloadURL  https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/noYoutubeShort.js
 // @description  Save your time
@@ -10,7 +10,7 @@
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=youtube.com
 // @grant        GM_addStyle
 // @grant        window.onurlchange
-// @run-at       document-body
+// @run-at       document-start
 // ==/UserScript==
 
 (function () {
