@@ -2,8 +2,8 @@
 // @name         Block Twitter home timeline
 // @namespace    https://github.com/Mathis-Gasparotto/tampermonkey-scripts/tree/master/scripts/maggio
 // @version      0.1.0
-// @updateURL    https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/noTwitterHomePage.js
-// @downloadURL  https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/noTwitterHomePage.js
+// @updateURL    https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/noTwitterHomeTimeline.js
+// @downloadURL  https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/noTwitterHomeTimeline.js
 // @description  Save your time
 // @author       Maggio
 // @match        https://x.com/*
