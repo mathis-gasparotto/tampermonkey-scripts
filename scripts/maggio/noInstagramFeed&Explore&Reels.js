@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Block Instagram feed & explore & reels
 // @namespace    https://github.com/Mathis-Gasparotto/tampermonkey-scripts/tree/master/scripts/maggio
-// @version      0.1.0
+// @version      0.1.1
 // @updateURL    https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/noInstagramFeed&Explore&Reels.js
 // @downloadURL  https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/noInstagramFeed&Explore&Reels.js
 // @description  Save your time
@@ -15,7 +15,13 @@
 
 (function () {
   GM_addStyle(`
-    .x1iyjqo2.xh8yej3 span[aria-describedby=":r3:"], .x1iyjqo2.xh8yej3 span[aria-describedby=":r5:"], .x1iyjqo2.xh8yej3 span[aria-describedby=":r6:"] {
+    .x1xgvd2v.x1o5hw5a .x1iyjqo2.xh8yej3 span[aria-describedby=":r2:"],
+    .x1xgvd2v.x1o5hw5a .x1iyjqo2.xh8yej3 span[aria-describedby=":r4:"],
+    .x1xgvd2v.x1o5hw5a .x1iyjqo2.xh8yej3 span[aria-describedby=":r5:"],
+    .x1xgvd2v.x1cy8zhl:not(.x1o5hw5a) .x1iyjqo2.xh8yej3 span[aria-describedby=":r3:"],
+    .x1xgvd2v.x1cy8zhl:not(.x1o5hw5a) .x1iyjqo2.xh8yej3 span[aria-describedby=":r5:"],
+    .x1xgvd2v.x1cy8zhl:not(.x1o5hw5a) .x1iyjqo2.xh8yej3 span[aria-describedby=":r6:"]
+    {
       display: none;
     }
   `)
