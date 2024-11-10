@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Disable target="_blank" on Aliexpress items
 // @namespace    https://github.com/Mathis-Gasparotto/tampermonkey-scripts/tree/master/scripts/maggio
-// @version      0.1.1
+// @version      0.1.2
 // @updateURL    https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/noTargetBlankOnAliexpressItems.js
 // @downloadURL  https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/noTargetBlankOnAliexpressItems.js
 // @description  Oui
@@ -10,23 +10,34 @@
 // @match        https://*.aliexpress.com/*
 // @exclude      https://*.aliexpress.com/gcp/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=aliexpress.com
-// @run-at       document-body
+// @run-at       document-end
 // ==/UserScript==
 
 (function () {
-  const body = document.body
-  let previousContent = body.innerHTML
+  let previousLinks = document.querySelectorAll('a[href*="aliexpress.com/item/"][target="_blank"]')
+  // let previousFusionProducts = document.querySelectorAll('#fusionPageCard div[class*="fusion-page-card--listItem--"] div[class*="productItem--itemImg--"], #fusionPageCard div[class*="fusion-page-card--listItem--"] div[class*="productItem--itemInfoTitle--"]')
   function checkForChanges() {
-    const currentContent = body.innerHTML
-    if (currentContent !== previousContent) {
-      // console.log('Le contenu du body a été modifié.')
+    const currentLinks = document.querySelectorAll('a[href*="aliexpress.com/item/"][target="_blank"]')
+    // const currentFusionProducts = document.querySelectorAll('#fusionPageCard div[class*="fusion-page-card--listItem--"] div[class*="productItem--itemImg--"], #fusionPageCard div[class*="fusion-page-card--listItem--"] div[class*="productItem--itemInfoTitle--"]')
+
+    const sameLinks = currentLinks.length === previousLinks.length && Object.values(currentLinks).every(function(value, index) { return value === previousLinks[index]})
+    // const sameFusionProducts = currentFusionProducts.length === previousFusionProducts.length && Object.values(currentFusionProducts).every(function(value, index) { return value === previousFusionProducts[index]})
+
+    // if (!sameLinks || !sameFusionProducts) {
+    if (!sameLinks) {
+      // console.log('Les liens ont été modifiés.')
 
       const links = document.querySelectorAll('a[href*="aliexpress.com/item/"][target="_blank"]')
       links.forEach(link => {
         link.removeAttribute('target')
       })
 
-      previousContent = currentContent
+      // const fusionProducts = document.querySelectorAll('#fusionPageCard div[class*="fusion-page-card--listItem--"] div[class*="productItem--itemImg--"], #fusionPageCard div[class*="fusion-page-card--listItem--"] div[class*="productItem--itemInfoTitle--"]')
+      // console.log("fusionProducts", fusionProducts)
+
+      previousLinks = links
+      // previousFusionProducts = fusionProducts
+
     }
   }
   setInterval(checkForChanges, 500)
