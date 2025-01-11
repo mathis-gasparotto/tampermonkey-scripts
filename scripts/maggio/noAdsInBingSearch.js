@@ -1,20 +1,22 @@
 // ==UserScript==
-// @name         No ad results on bing search
+// @name         No ads results on bing search
 // @namespace    https://github.com/Mathis-Gasparotto/tampermonkey-scripts/tree/master/scripts/maggio
-// @version      0.4.1
+// @version      0.4.2
 // @updateURL    https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/noAdsInBingSearch.js
 // @downloadURL  https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/noAdsInBingSearch.js
 // @description  ui
 // @author       Maggio
-// @match        https://www.bing.com/search?q=*
+// @match        bing.com/search?*
+// @match        www.bing.com/search?*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=bing.com
 // @grant        GM_addStyle
 // @run-at       document-start
 // ==/UserScript==
 
-(function() {
+(function () {
     GM_addStyle(`
-    .b_ad.b_adTop {
-        display: none;
-    `)
+      .b_adTop, .b_topw_rrat, #adstop_gradiant_separator {
+        display: none !important;
+      }
+    `);
 })();
