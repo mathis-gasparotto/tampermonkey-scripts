@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Disable target="_blank" on Aliexpress items
 // @namespace    https://github.com/Mathis-Gasparotto/tampermonkey-scripts/tree/master/scripts/maggio
-// @version      0.1.2
+// @version      0.1.3
 // @updateURL    https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/noTargetBlankOnAliexpressItems.js
 // @downloadURL  https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/noTargetBlankOnAliexpressItems.js
 // @description  Oui
@@ -14,33 +14,42 @@
 // ==/UserScript==
 
 (function () {
-  let previousLinks = document.querySelectorAll('a[href*="aliexpress.com/item/"][target="_blank"]')
+  let previousLinks = document.querySelectorAll(
+    'a[href*="aliexpress.com/item/"][target="_blank"]'
+  );
+  previousLinks.forEach((link) => {
+    link.removeAttribute("target");
+  });
   // let previousFusionProducts = document.querySelectorAll('#fusionPageCard div[class*="fusion-page-card--listItem--"] div[class*="productItem--itemImg--"], #fusionPageCard div[class*="fusion-page-card--listItem--"] div[class*="productItem--itemInfoTitle--"]')
   function checkForChanges() {
-    const currentLinks = document.querySelectorAll('a[href*="aliexpress.com/item/"][target="_blank"]')
+    const currentLinks = document.querySelectorAll(
+      'a[href*="aliexpress.com/item/"][target="_blank"]'
+    );
     // const currentFusionProducts = document.querySelectorAll('#fusionPageCard div[class*="fusion-page-card--listItem--"] div[class*="productItem--itemImg--"], #fusionPageCard div[class*="fusion-page-card--listItem--"] div[class*="productItem--itemInfoTitle--"]')
 
-    const sameLinks = currentLinks.length === previousLinks.length && Object.values(currentLinks).every(function(value, index) { return value === previousLinks[index]})
+    const sameLinks =
+      currentLinks.length === previousLinks.length &&
+      Object.values(currentLinks).every(function (value, index) {
+        return value === previousLinks[index];
+      });
     // const sameFusionProducts = currentFusionProducts.length === previousFusionProducts.length && Object.values(currentFusionProducts).every(function(value, index) { return value === previousFusionProducts[index]})
 
     // if (!sameLinks || !sameFusionProducts) {
     if (!sameLinks) {
       // console.log('Les liens ont été modifiés.')
 
-      const links = document.querySelectorAll('a[href*="aliexpress.com/item/"][target="_blank"]')
-      links.forEach(link => {
-        link.removeAttribute('target')
-      })
+      currentLinks.forEach((link) => {
+        link.removeAttribute("target");
+      });
 
       // const fusionProducts = document.querySelectorAll('#fusionPageCard div[class*="fusion-page-card--listItem--"] div[class*="productItem--itemImg--"], #fusionPageCard div[class*="fusion-page-card--listItem--"] div[class*="productItem--itemInfoTitle--"]')
       // console.log("fusionProducts", fusionProducts)
 
-      previousLinks = links
+      previousLinks = currentLinks;
       // previousFusionProducts = fusionProducts
-
     }
   }
-  setInterval(checkForChanges, 500)
+  setInterval(checkForChanges, 500);
 
   // const config = { childList: true, subtree: true }
   // const observer = new MutationObserver((mutationsList, observer) => {
