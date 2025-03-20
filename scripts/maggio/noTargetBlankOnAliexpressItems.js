@@ -14,24 +14,20 @@
 // ==/UserScript==
 
 (function () {
-  let previousLinks = document.querySelectorAll(
-    'a[href*="aliexpress.com/item/"][target="_blank"]'
-  );
+  let previousLinks = document.querySelectorAll('a[href*="aliexpress.com/item/"][target="_blank"]')
   previousLinks.forEach((link) => {
-    link.removeAttribute("target");
-  });
+    link.removeAttribute('target')
+  })
   // let previousFusionProducts = document.querySelectorAll('#fusionPageCard div[class*="fusion-page-card--listItem--"] div[class*="productItem--itemImg--"], #fusionPageCard div[class*="fusion-page-card--listItem--"] div[class*="productItem--itemInfoTitle--"]')
   function checkForChanges() {
-    const currentLinks = document.querySelectorAll(
-      'a[href*="aliexpress.com/item/"][target="_blank"]'
-    );
+    const currentLinks = document.querySelectorAll('a[href*="aliexpress.com/item/"][target="_blank"]')
     // const currentFusionProducts = document.querySelectorAll('#fusionPageCard div[class*="fusion-page-card--listItem--"] div[class*="productItem--itemImg--"], #fusionPageCard div[class*="fusion-page-card--listItem--"] div[class*="productItem--itemInfoTitle--"]')
 
     const sameLinks =
       currentLinks.length === previousLinks.length &&
       Object.values(currentLinks).every(function (value, index) {
-        return value === previousLinks[index];
-      });
+        return value === previousLinks[index]
+      })
     // const sameFusionProducts = currentFusionProducts.length === previousFusionProducts.length && Object.values(currentFusionProducts).every(function(value, index) { return value === previousFusionProducts[index]})
 
     // if (!sameLinks || !sameFusionProducts) {
@@ -39,17 +35,17 @@
       // console.log('Les liens ont été modifiés.')
 
       currentLinks.forEach((link) => {
-        link.removeAttribute("target");
-      });
+        link.removeAttribute('target')
+      })
 
       // const fusionProducts = document.querySelectorAll('#fusionPageCard div[class*="fusion-page-card--listItem--"] div[class*="productItem--itemImg--"], #fusionPageCard div[class*="fusion-page-card--listItem--"] div[class*="productItem--itemInfoTitle--"]')
       // console.log("fusionProducts", fusionProducts)
 
-      previousLinks = currentLinks;
+      previousLinks = currentLinks
       // previousFusionProducts = fusionProducts
     }
   }
-  setInterval(checkForChanges, 500);
+  setInterval(checkForChanges, 500)
 
   // const config = { childList: true, subtree: true }
   // const observer = new MutationObserver((mutationsList, observer) => {
@@ -61,4 +57,4 @@
   //   }
   // })
   // observer.observe(body, config)
-})();
+})()
