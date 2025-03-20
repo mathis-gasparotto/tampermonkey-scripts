@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Disable target="_blank" on Aliexpress items
 // @namespace    https://github.com/Mathis-Gasparotto/tampermonkey-scripts/tree/master/scripts/maggio
-// @version      0.1.3
+// @version      0.1.4
 // @updateURL    https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/noTargetBlankOnAliexpressItems.js
 // @downloadURL  https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/noTargetBlankOnAliexpressItems.js
 // @description  Oui
@@ -9,11 +9,12 @@
 // @match        https://aliexpress.com/*
 // @match        https://*.aliexpress.com/*
 // @exclude      https://*.aliexpress.com/gcp/*
+// @exclude      https://*.aliexpress.com/ssr/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=aliexpress.com
 // @run-at       document-end
 // ==/UserScript==
 
-(function () {
+;(function () {
   let previousLinks = document.querySelectorAll('a[href*="aliexpress.com/item/"][target="_blank"]')
   previousLinks.forEach((link) => {
     link.removeAttribute('target')
