@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Copy Aliexpress order datas
 // @namespace    https://github.com/Mathis-Gasparotto/tampermonkey-scripts/tree/master/scripts/maggio
-// @version      0.1.1
+// @version      0.1.2
 // @updateURL    https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/copyAliexpressOrderDatas.js
 // @downloadURL  https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/copyAliexpressOrderDatas.js
 // @description  Copy Aliexpress order datas for past on a google sheet
@@ -37,7 +37,7 @@
         ).toLocaleDateString('en-US')
         const orderTotal = order
           .getElementsByClassName('order-item-content-opt-price-total')[0]
-          .innerText.match(/(\d+),(\d+)/)[0]
+          .innerText.match(/(\d+),(\d{2})/)[0]
           .replace(',', '.')
 
         const productName = order.getElementsByClassName('order-item-content-info-name')[0]?.innerText ?? ''
@@ -47,7 +47,7 @@
           order
             .getElementsByClassName('order-item-content-info-number')[0]
             ?.getElementsByTagName('div')[0]
-            .innerText.match(/(\d+),(\d+)/)[0]
+            .innerText.match(/(\d+),(\d{2})/)[0]
             .replace(',', '.') ?? ''
 
         const copySpan = document.createElement('span')
