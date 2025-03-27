@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Copy Aliexpress order datas
 // @namespace    https://github.com/Mathis-Gasparotto/tampermonkey-scripts/tree/master/scripts/maggio
-// @version      0.1.4
+// @version      0.1.5
 // @updateURL    https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/copyAliexpressOrderDatas.js
 // @downloadURL  https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/copyAliexpressOrderDatas.js
 // @description  Copy Aliexpress order datas for past on a google sheet
@@ -21,7 +21,7 @@
   let interval = null
 
   function addButton(orders) {
-    if (Array.from(orders).filter((order) => !ordersDone.includes(order)).length > 0) clearInterval(interval)
+    if (!Array.from(orders).every((order) => ordersDone.includes(order))) clearInterval(interval)
 
     Array.from(orders)
       .filter((order) => !ordersDone.includes(order))
