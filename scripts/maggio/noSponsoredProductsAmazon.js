@@ -1,15 +1,15 @@
 // ==UserScript==
 // @name         No sponsored products on Amazon (FR) search results
 // @namespace    https://github.com/Mathis-Gasparotto/tampermonkey-scripts/tree/master/scripts/maggio
-// @version      0.3.1
+// @version      0.3.2
 // @updateURL    https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/noSponsoredProductsAmazon.js
 // @downloadURL  https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/noSponsoredProductsAmazon.js
 // @description  NTM Amazon
 // @author       Maggio
-// @match        https://*.amazon.fr/s?*
-// @match        https://amazon.fr/s?*
-// @match        https://*.amazon.com/s?*
-// @match        https://amazon.com/s?*
+// @match        https://*.amazon.fr/s*
+// @match        https://amazon.fr/s*
+// @match        https://*.amazon.com/s*
+// @match        https://amazon.com/s*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=amazon.fr
 // @grant        GM_addStyle
 // @run-at       document-start
@@ -24,5 +24,5 @@
     .s-result-item.AdHolder {
       display: none !important;
     }
-  `);
-})();
+  `)
+})()
