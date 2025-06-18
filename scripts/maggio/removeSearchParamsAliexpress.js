@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Remove search params from path on Aliexpress
 // @namespace    https://github.com/Mathis-Gasparotto/tampermonkey-scripts/tree/master/scripts/maggio
-// @version      0.1.13
+// @version      0.1.14
 // @updateURL    https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/removeSearchParamsAliexpress.js
 // @downloadURL  https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/removeSearchParamsAliexpress.js
 // @description  bye bye huge links on Aliexpress
@@ -18,6 +18,7 @@
 // @exclude      https://*.aliexpress.com/p/message/index.html*
 // @exclude      https://msg.aliexpress.com/buyerMsgListNew.htm*
 // @exclude      https://*.aliexpress.com/p/wish-manage/detail.html*
+// @exclude      https://helpcenter.aliexpress.com/s/BuyerHelp/search*
 // @exclude      https://*.aliexpress.com/p/cro-violation-center/detail.html*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=aliexpress.com
 // @grant        none
