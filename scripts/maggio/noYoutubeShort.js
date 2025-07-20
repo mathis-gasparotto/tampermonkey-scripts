@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Remove Shorts from Youtube
 // @namespace    https://github.com/Mathis-Gasparotto/tampermonkey-scripts/tree/master/scripts/maggio
-// @version      0.4.0
+// @version      0.5.0
 // @updateURL    https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/noYoutubeShort.js
 // @downloadURL  https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/noYoutubeShort.js
 // @description  Save your time
@@ -22,12 +22,23 @@
     const newUrl = url.replace('youtube.com/shorts/', 'youtube.com/watch?v=')
     window.location.href = newUrl
   }
+  function openInNewTab(url) {
+    const newUrl = url.replace('youtube.com/shorts/', 'youtube.com/watch?v=')
+    window.open(newUrl, '_blank')
+  }
 
   document.addEventListener('click', (e) => {
     const aTag = e.target.closest("a[href*='/shorts/']")
     if (aTag && aTag.href) {
       e.preventDefault()
       redirectPathToWatch(aTag.href)
+    }
+  })
+  document.addEventListener('auxclick', (e) => {
+    const aTag = e.target.closest("a[href*='/shorts/']")
+    if (aTag && aTag.href && e.button == 1) {
+      e.preventDefault()
+      openInNewTab(aTag.href)
     }
   })
 
