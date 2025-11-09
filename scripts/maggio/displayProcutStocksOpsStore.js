@@ -1,12 +1,13 @@
 // ==UserScript==
 // @name         Display product stocks from OPS Store
 // @namespace    https://github.com/Mathis-Gasparotto/tampermonkey-scripts/tree/master/scripts/maggio
-// @version      0.0.1
+// @version      0.0.2
 // @updateURL    https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/displayProcutStocksOpsStore.js
 // @downloadURL  https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/displayProcutStocksOpsStore.js
 // @description  Get and display product stocks from OPS Store
 // @author       Maggio
 // @match        https://www.ops-store.fr/*.html
+// @match        https://www.ops-store.com/en/*.html
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=ops-store.fr
 // @run-at       document-body
 // @grant        GM_log
@@ -15,6 +16,14 @@
 (function () {
   const TARGET_PATH = '/ajax/ajax_calculfichearticle.php'
   const CLONE_HEADER = 'X-TM-Clone'
+
+  const LANG = location.hostname.split('.')[2]
+  let REGEX = null
+  if (LANG === 'fr') {
+    REGEX = /Nous vous recommandons la quantité\s*(\d+).(\d{2})/;
+  } else {
+    REGEX = /We recommend the following quantity\s*(\d+).(\d{2})/;
+  }
 
   function shouldHandle (url) {
     try {
@@ -92,15 +101,19 @@
   function getProductStocksFromJson (json) {
     const messageQte = json.message_qte
     /*Nous vous recommandons la quantité 10.00 <a title="Explication" class="fiche-article_aide" style="cursor:pointer;" onclick="var etat = document.getElementById('message_complementaire').style.display;if (etat == 'block'){document.getElementById('message_complementaire').style.display='none';}else{document.getElementById('message_complementaire').style.display='block';}">(Explication)</a>*/
-    const regex = /Nous vous recommandons la quantité\s*(\d+).(\d{2})/;
-    return messageQte.match(regex)[1]
+    /*We recommend the following quantity22.00 <a title="Explanation" class="fiche-article_aide" style="cursor:pointer;" onclick="var etat = document.getElementById('message_complementaire').style.display;if (etat == 'block'){document.getElementById('message_complementaire').style.display='none';}else{document.getElementById('message_complementaire').style.display='block';}">(Explanation)</a>*/
+    return messageQte.match(REGEX)[1]
   }
 
   function displayProductStocks (stockQuantity) {
     const productAddToCartContainer = document.getElementsByClassName('bloc_bouton_ajout_panier')[0]
     const stockElement = document.createElement('div')
     stockElement.style.marginTop = '10px'
-    stockElement.innerHTML = `Stock restant : <span style="font-weight: bolder;">${stockQuantity}</span>`
+    if (LANG === 'fr') {
+      stockElement.innerHTML = `Stock restant : <span style="font-weight: bolder;">${stockQuantity}</span>`
+    } else {
+      stockElement.innerHTML = `Remaining stock : <span style="font-weight: bolder;">${stockQuantity}</span>`
+    }
     productAddToCartContainer.appendChild(stockElement)
   }
 
