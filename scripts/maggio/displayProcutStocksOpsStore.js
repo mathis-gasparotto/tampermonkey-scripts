@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Display product stocks from OPS Store
 // @namespace    https://github.com/Mathis-Gasparotto/tampermonkey-scripts/tree/master/scripts/maggio
-// @version      0.0.2
+// @version      0.0.3
 // @updateURL    https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/displayProcutStocksOpsStore.js
 // @downloadURL  https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/displayProcutStocksOpsStore.js
 // @description  Get and display product stocks from OPS Store
@@ -16,13 +16,14 @@
 (function () {
   const TARGET_PATH = '/ajax/ajax_calculfichearticle.php'
   const CLONE_HEADER = 'X-TM-Clone'
+  let alreadySent = false
 
   const LANG = location.hostname.split('.')[2]
-  let REGEX = null
+  let regex = null
   if (LANG === 'fr') {
-    REGEX = /Nous vous recommandons la quantité\s*(\d+).(\d{2})/;
+    regex = /Nous vous recommandons la quantité\s*(\d+).(\d{2})/;
   } else {
-    REGEX = /We recommend the following quantity\s*(\d+).(\d{2})/;
+    regex = /We recommend the following quantity\s*(\d+).(\d{2})/;
   }
 
   function shouldHandle (url) {
@@ -77,6 +78,7 @@
   }
 
   async function replayWithFormData (fd) {
+    if (alreadySent) return
     try {
       const resp = await fetch(TARGET_PATH, {
         method: 'POST',
@@ -93,6 +95,7 @@
       } catch {
         GM_log('[TM OPS] Replayed response (TEXT):', text)
       }
+      alreadySent = true
     } catch (e) {
       GM_log('[TM OPS] Error replaying request', e)
     }
@@ -102,7 +105,7 @@
     const messageQte = json.message_qte
     /*Nous vous recommandons la quantité 10.00 <a title="Explication" class="fiche-article_aide" style="cursor:pointer;" onclick="var etat = document.getElementById('message_complementaire').style.display;if (etat == 'block'){document.getElementById('message_complementaire').style.display='none';}else{document.getElementById('message_complementaire').style.display='block';}">(Explication)</a>*/
     /*We recommend the following quantity22.00 <a title="Explanation" class="fiche-article_aide" style="cursor:pointer;" onclick="var etat = document.getElementById('message_complementaire').style.display;if (etat == 'block'){document.getElementById('message_complementaire').style.display='none';}else{document.getElementById('message_complementaire').style.display='block';}">(Explanation)</a>*/
-    return messageQte.match(REGEX)[1]
+    return messageQte.match(regex)[1]
   }
 
   function displayProductStocks (stockQuantity) {
@@ -120,28 +123,30 @@
   // Intercept fetch
   const origFetch = window.fetch
   window.fetch = async function (input, init) {
-    try {
-      const url = typeof input === 'string' ? input : input.url
-      const method = (init && init.method) || (typeof input !== 'string' && input.method) || 'GET'
-      const isClone = headersHasClone((init && init.headers) || (typeof input !== 'string' && input.headers))
+    if (!alreadySent) {
+      try {
+        const url = typeof input === 'string' ? input : input.url
+        const method = (init && init.method) || (typeof input !== 'string' && input.method) || 'GET'
+        const isClone = headersHasClone((init && init.headers) || (typeof input !== 'string' && input.headers))
 
-      if (shouldHandle(url) && method.toUpperCase() === 'POST' && !isClone) {
-        let entries = []
-        if (init && init.body != null) {
-          entries = bodyToEntries(init.body)
-        } else if (typeof input !== 'string' && input.bodyUsed === false) {
-          // Best effort if a Request is passed without init
-          try { entries = bodyToEntries(await input.clone().text()) } catch {}
+        if (shouldHandle(url) && method.toUpperCase() === 'POST' && !isClone) {
+          let entries = []
+          if (init && init.body != null) {
+            entries = bodyToEntries(init.body)
+          } else if (typeof input !== 'string' && input.bodyUsed === false) {
+            // Best effort if a Request is passed without init
+            try { entries = bodyToEntries(await input.clone().text()) } catch {}
+          }
+          if (entries.length) {
+            const fd = buildNewFormData(entries)
+            setTimeout(() => {
+              replayWithFormData(fd).catch(GM_log)
+            }, 1000)
+          }
         }
-        if (entries.length) {
-          const fd = buildNewFormData(entries)
-          setTimeout(() => {
-            replayWithFormData(fd).catch(GM_log)
-          }, 1000)
-        }
+      } catch (e) {
+        GM_log('[TM OPS] Error intercepting fetch', e)
       }
-    } catch (e) {
-      GM_log('[TM OPS] Error intercepting fetch', e)
     }
     return origFetch.apply(this, arguments)
   }
@@ -157,16 +162,18 @@
   }
 
   XMLHttpRequest.prototype.send = function (body) {
-    try {
-      if (this._tm_method && this._tm_method.toUpperCase() === 'POST' && shouldHandle(this._tm_url)) {
-        const entries = bodyToEntries(body)
-        if (entries.length) {
-          const fd = buildNewFormData(entries)
-          replayWithFormData(fd).catch(GM_log)
+    if (!alreadySent) {
+      try {
+        if (this._tm_method && this._tm_method.toUpperCase() === 'POST' && shouldHandle(this._tm_url)) {
+          const entries = bodyToEntries(body)
+          if (entries.length) {
+            const fd = buildNewFormData(entries)
+            replayWithFormData(fd).catch(GM_log)
+          }
         }
+      } catch (e) {
+        GM_log('[TM OPS] Error intercepting XMLHttpRequest', e)
       }
-    } catch (e) {
-      GM_log('[TM OPS] Error intercepting XMLHttpRequest', e)
     }
     return origSend.apply(this, arguments)
   }
