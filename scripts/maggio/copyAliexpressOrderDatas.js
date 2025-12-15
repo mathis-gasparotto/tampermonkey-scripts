@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Copy Aliexpress order datas
 // @namespace    https://github.com/Mathis-Gasparotto/tampermonkey-scripts/tree/master/scripts/maggio
-// @version      0.1.6
+// @version      0.1.7
 // @updateURL    https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/copyAliexpressOrderDatas.js
 // @downloadURL  https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/copyAliexpressOrderDatas.js
 // @description  Copy Aliexpress order datas for past on a google sheet
@@ -107,7 +107,7 @@
 
           const orderTotal = getOrderTotal(order)
 
-          const productName = getProductName(order)
+          const productName = getProductName(order).replaceAll('"', '""')
           const productLink = getProductLink(order)
           const productQuantity = getProductQuantity(order)
           const productUnitPrice = getProductUnitPrice(order)
