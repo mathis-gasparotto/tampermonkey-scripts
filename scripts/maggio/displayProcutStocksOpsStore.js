@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Display product stocks from OPS Store
 // @namespace    https://github.com/Mathis-Gasparotto/tampermonkey-scripts/tree/master/scripts/maggio
-// @version      0.0.3
+// @version      0.0.4
 // @updateURL    https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/displayProcutStocksOpsStore.js
 // @downloadURL  https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/displayProcutStocksOpsStore.js
 // @description  Get and display product stocks from OPS Store
@@ -88,7 +88,7 @@
       })
       const text = await resp.text()
       try {
-        GM_log('[TM OPS] Replayed response (JSON):', JSON.parse(text))
+        // GM_log('[TM OPS] Replayed response (JSON):', JSON.parse(text))
         const stockQuantity = getProductStocksFromJson(JSON.parse(text))
         GM_log('[TM OPS] Stock quantity:', stockQuantity)
         displayProductStocks(stockQuantity)
