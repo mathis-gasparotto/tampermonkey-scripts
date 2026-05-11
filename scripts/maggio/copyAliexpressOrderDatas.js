@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Copy Aliexpress order datas
 // @namespace    https://github.com/Mathis-Gasparotto/tampermonkey-scripts/tree/master/scripts/maggio
-// @version      0.1.7
+// @version      0.1.8
 // @updateURL    https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/copyAliexpressOrderDatas.js
 // @downloadURL  https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/copyAliexpressOrderDatas.js
 // @description  Copy Aliexpress order datas for past on a google sheet
@@ -128,7 +128,7 @@
       })
   }
 
-  addButton(document.getElementsByClassName('order-item'))
+  setTimeout(addButton(document.getElementsByClassName('order-item')), 3000)
 
   const orderMoreBtn = document.getElementsByClassName('order-more')[0]?.getElementsByTagName('button')[0]
   if (orderMoreBtn) {
