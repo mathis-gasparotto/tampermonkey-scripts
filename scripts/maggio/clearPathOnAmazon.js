@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Clear path on Amazon
 // @namespace    https://github.com/Mathis-Gasparotto/tampermonkey-scripts/tree/master/scripts/maggio
-// @version      0.2.5
+// @version      0.2.6
 // @updateURL    https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/clearPathOnAmazon.js
 // @downloadURL  https://mathis-gasparotto.github.io/tampermonkey-scripts/scripts/maggio/clearPathOnAmazon.js
 // @description  Bye bye huge paths on Amazon
@@ -30,8 +30,8 @@
 
   function clearUrl() {
     if (
-      window.location.href.match(/^http[s]?:\/\/S+amazon\.\D+\/gp\/your-account\/order-details\?./) ||
-      window.location.href.match(/^http[s]?:\/\/S+amazon\.\D+\/s\?./)
+      window.location.href.match(/^http[s]?:\/\/\S+amazon\.\D+\/gp\/your-account\/order-details\?./) ||
+      window.location.href.match(/^http[s]?:\/\/\S+amazon\.\D+\/s\?./)
     ) {
       return
     }
